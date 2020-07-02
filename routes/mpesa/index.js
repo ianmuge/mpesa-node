@@ -21,6 +21,7 @@ route.post("/validation",async (req, res, next) => {
             validation_timestamp: Date.now()
         });
         let response = {"ResultCode": 0, "ResultDesc": "Accepted"}
+        eventEmitter.emit('mpesa-validation', transaction);
         res.status(200).json(response);
     }
     catch (e) {
@@ -37,6 +38,7 @@ route.post("/confirmation",async (req, res, next) => {
         let transaction=await Transaction.findOne({TransID:req.body.TransID});
         transaction.confirmation_timestamp = Date.now();
         await transaction.save();
+        eventEmitter.emit('mpesa-confirmation', transaction);
         let response={"ResultCode": 0,"ResultDesc": "Accepted"}
         res.status(200).json(response);
     }

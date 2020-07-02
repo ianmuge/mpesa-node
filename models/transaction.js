@@ -15,7 +15,8 @@ const TransactionSchema=new Schema({
     MiddleName: {type:String},
     LastName: {type:String},
     confirmation_timestamp : {type: Date},
-    validation_timestamp:  {type: Date}
+    validation_timestamp:  {type: Date},
+    notification_id:{type:String}
 },{
     timestamps: {
         createdAt: 'created_at',
@@ -28,7 +29,6 @@ TransactionSchema.set('toJSON', {
     transform: function (doc, ret) {
         delete ret.id;
         delete ret._id;
-
     }
 });
 const Transaction = mongoose.model('transaction', TransactionSchema);
