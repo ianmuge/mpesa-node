@@ -1,0 +1,32 @@
+{% if pages > 0 %}
+    <div class="text-center">
+        <ul class="pagination text-center">
+            {% if current == 1  %}
+                <li class="disabled"><a>First</a></li>
+            {% else %}
+                <li><a href="/transaction/1">First</a></li>
+            {% endif %}
+            {% set i = current>5 ? current-4:1 %}
+
+            {% if i != 1  %}
+                <li class="disabled"><a>...</a></li>
+            {% endif %}
+
+            {% for i in 1..pages if i <= (current + 4) and i <= pages %}
+                {% if (i == current)  %}
+                    <li class="active"><a>{{ i }}</a></li>
+                {% else  %}
+                    <li><a href="/transaction/{{i}}">{{i}}</a></li>
+                {% endif %}
+                {% if i == current + 4 and i < pages %}
+                    <li class="disabled"><a>...</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if current == pages  %}
+                <li class="disabled"><a>Last</a></li>
+            {%  else  %}
+                <li><a href="/transaction/{{ pages }}">Last</a></li>
+            {% endif %}
+        </ul>
+    </div>
+{% endif %}

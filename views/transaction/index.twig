@@ -1,0 +1,37 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <h1 class="text-center">MPesa Transactions</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Bill Ref.</th>
+            <th>MSISDN</th>
+            <th>Name</th>
+            <th>Validation</th>
+            <th>Confirmation</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for trans in transactions %}
+            <tr>
+                <td>{{ trans.TransID}}</td>
+                <td>{{ trans.TransAmount}}</td>
+                <td>{{ trans.BillRefNumber}}</td>
+                <td>{{ trans.MSISDN}}</td>
+                <td>{{ trans.FirstName}} {{ trans.LastName }}</td>
+                <td>{{ trans.validation_timestamp}}</td>
+                <td>{{ trans.confirmation_timestamp}}</td>
+                <td></td>
+            </tr>
+        {% else %}
+            <h3>No transactions available!</h3>
+        {% endfor %}
+
+        </tbody>
+    </table>
+   {% include 'paginator.twig' %}
+{% endblock %}

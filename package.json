@@ -4,8 +4,8 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start:dev": "nodemon watch . --inspect app.js",
-    "start:prod": "node server.js",
+    "start:dev": "nodemon --watch . -e js,css,twig --inspect app.js",
+    "start:prod": "node app.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },
