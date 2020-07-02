@@ -5,7 +5,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cors=require("cors");
 const mongoose = require('mongoose');
-
+const Agenda = require('agenda');
 exports.init=(app)=>{
 // view engine setup
     app.set('views', './views');
@@ -23,4 +23,14 @@ exports.init=(app)=>{
         }).catch((err) => {
         console.log(`Error: ${err}`);
     });
+    const agenda=new Agenda({
+        // db: {address: mongoose.connection.toString(), collection: 'delayed'},
+        mongo: mongoose.connection,
+        processEvery: '30 seconds'
+    });
+    require("../tasks")(agenda);
+    (async function() {
+        await agenda.start();
+    })();
+    exports.agenda=agenda;
 };
