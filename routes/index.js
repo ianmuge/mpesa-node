@@ -8,10 +8,13 @@ module.exports =(app)=>{
     res.render('index', { title: 'Express' });
   });
 
+  app.use('/',require('./mpesa'));
   app.use('/transaction',require('./transaction'));
 
 // catch 404 and forward to error handler
   app.use(function(req, res, next) {
     next(createError(404));
   });
+  // error handler
+
 };

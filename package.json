@@ -9,10 +9,17 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
+  "bin": {
+    "mpesa": "./bin/index.js"
+  },
   "author": "Ian Muge",
+  "keywords": [
+    "mpesa"
+  ],
   "dependencies": {
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
+    "commander": "^5.1.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
