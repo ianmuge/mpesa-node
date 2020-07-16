@@ -1,7 +1,8 @@
 const axios=require("axios");
 module.exports = (agenda)=>{
     agenda.define('send text', {priority: 'high', concurrency: 10}, (job,done) => {
-        const {to,message} = job.attrs.data;
+        let {to,message} = job.attrs.data;
+        to=(process.env.ENV==="sandbox")?process.env.TEST_SMS_MSISDN:to;
         console.log(`Sending text to: ${to}`);
         let headers = {
             'Content-Type': "application/json"
